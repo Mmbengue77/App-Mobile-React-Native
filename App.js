@@ -5,14 +5,15 @@ import React from 'react';
 // import 'firebase/compat/firestore';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { StatusBar } from 'expo-status-bar';
-import { NativeBaseProvider } from 'native-base';
+// import { StatusBar } from 'expo-status-bar';
+// import { NativeBaseProvider } from 'native-base';
 import { Text, StyleSheet, View, SafeAreaView } from 'react-native';
 import { HomeScreen, LaunchScreen, LoginScreen, SignupScreen, UserScreen } from './screens';
+// Required : Navigation import
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+// import { useEffect, useState } from 'react';
+// import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { app, storage, auth } from './lib';
 
 import { CustomButton } from './components' ;
@@ -49,6 +50,9 @@ const App = () => {
       });
   };
 
+  const Stack = createNativeStackNavigator();
+
+
   return (
     <View style={styles.BG}>
       {user ? (
@@ -59,32 +63,24 @@ const App = () => {
           <Button title="Se déconnecter" onPress={handleLogout} />
         </>
       ) : (
-      //   <><RegisterForm /> <LoginForm /></>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name='LaunchScreen' component={LaunchScreen}
+            options={{headerShown: false}} />
 
-        <LinearGradient 
-        // colors={['rgba(78,200,200,1)', 'rgba(34,34,34,1)']} 
-        colors={['rgba(153,166,245,1)', 'rgba(29,213,143,1)']} 
-        style={styles.BG_LG} >
-            <SafeAreaView style={styles.container}>
-                
-                <View style={styles.logo}>
-                    <Text style={styles.title}>Welcome</Text>
-                    <Text style={styles.slogan}>Share your happiness with all the world</Text>
-                </View>
-
-                <View style={styles.groupeBtns}>
-                    <CustomButton label={"Login"}
-                    onPress={()=>navigation.navigate('LoginScreen')} />
-
-                    <View style={styles.divider} />
-
-                    <CustomButton outline label="Sign up" 
-                    onPress={()=>navigation.navigate('SignupScreen')} />
-                </View>
-
-            </SafeAreaView>
-        </LinearGradient>
-        
+            <Stack.Screen name='SignupScreen' component={SignupScreen}
+            options={ {
+              title:'Sign up', 
+              headerStyle: {
+                backgroundColor: '#E7CBCB',
+              },
+              headerTintColor: '#fff',
+              headerBackTitleStyle: {
+                color: '#000'
+              }
+            }} />
+          </Stack.Navigator>
+        </NavigationContainer>
       )}
     </View>
     

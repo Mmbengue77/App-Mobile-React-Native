@@ -7,21 +7,20 @@ import { CustomButton } from '../components';
 
 
 export default function LaunchScreen({navigation}) {
+    console.log(navigation)
 // Rendu
 return (
     <View style={styles.BG}>
         <LinearGradient 
-        colors={['rgba(84,84,84,1)', 'rgba(34,34,34,1)']} 
+        // colors={['rgba(78,200,200,1)', 'rgba(34,34,34,1)']} 
+        colors={['rgba(153,166,245,1)', 'rgba(29,213,143,1)']} 
         style={styles.BG_LG} >
             <SafeAreaView style={styles.container}>
                 
                 <View style={styles.logo}>
-                    <Image source={require('../assets/images/launch2.png')}
-                    style={styles.logoImg} />
-                    <Text style={styles.title}>ScoreTube</Text>
-                    <Text style={styles.slogan}> WHERE SPORTS AND ENTERTAINMENT COLLIDE</Text>
+                    <Text style={styles.title}>Welcome</Text>
+                    <Text style={styles.slogan}>Share your happiness with all the world</Text>
                 </View>
-                
 
                 <View style={styles.groupeBtns}>
                     <CustomButton label={"Login"}
