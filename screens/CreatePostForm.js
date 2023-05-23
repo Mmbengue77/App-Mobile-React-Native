@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
-import { db, storage } from './firebase';
+import { app, storage, auth } from '../lib';
 
 const CreatePostForm = ({ user }) => {
   const [text, setText] = useState('');
@@ -8,7 +8,7 @@ const CreatePostForm = ({ user }) => {
 
   const handleCreatePost = () => {
     // Créer un nouveau document dans la collection "posts" de Firestore
-    const postRef = db.collection('posts').doc();
+    const postRef = storage.collection('posts').doc();
     const postId = postRef.id;
 
     // Charger l'image dans Firebase Storage

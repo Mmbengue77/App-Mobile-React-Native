@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
-import { firebase } from './firebase';
+import { app, storage, auth } from '../lib';
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = () => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+  const handleLogin = () => {
+    auth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        // Utilisateur inscrit avec succès
-        console.log('Utilisateur inscrit :', userCredential.user);
+        // Utilisateur connecté avec succès
+        console.log('Utilisateur connecté :', userCredential.user);
       })
       .catch((error) => {
-        // Erreur lors de l'inscription
-        console.log('Erreur lors de l\'inscription :', error);
+        // Erreur lors de la connexion
+        console.log('Erreur lors de la connexion :', error);
       });
   };
 
@@ -31,9 +31,9 @@ const RegisterForm = () => {
         onChangeText={setPassword}
         value={password}
       />
-      <Button title="S'inscrire" onPress={handleRegister} />
+      <Button title="Se connecter" onPress={handleLogin} />
     </View>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { db } from './firebase';
+import { app, storage, auth } from '../lib';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // Récupérer la liste des posts depuis Firestore
-    const unsubscribe = db.collection('posts')
+    const unsubscribe = storage.collection('posts')
       .orderBy('createdAt', 'desc')
       .onSnapshot((snapshot) => {
         const newPosts = snapshot.docs.map((doc) => ({

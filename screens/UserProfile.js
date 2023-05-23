@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
-import { firebase, db, storage } from './firebase';
+import { app, storage, auth } from '../lib';
 
 const UserProfile = ({ user }) => {
   const [name, setName] = useState('');
@@ -8,7 +8,7 @@ const UserProfile = ({ user }) => {
 
   const handleUpdateProfile = () => {
     // Mettre à jour le profil utilisateur dans Firestore
-    db.collection('users').doc(user.uid).update({
+    storage.collection('users').doc(user.uid).update({
       name,
       bio,
     })
