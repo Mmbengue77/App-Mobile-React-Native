@@ -68,6 +68,18 @@ const App = () => {
             <Stack.Screen name='LaunchScreen' component={LaunchScreen}
             options={{headerShown: false}} />
 
+            <Stack.Screen name='LoginScreen' component={LoginScreen}
+            options={ {
+              title:'Sign up', 
+              headerStyle: {
+                backgroundColor: '#E7CBCB',
+              },
+              headerTintColor: '#fff',
+              headerBackTitleStyle: {
+                color: '#000'
+              }
+            }} />
+            
             <Stack.Screen name='SignupScreen' component={SignupScreen}
             options={ {
               title:'Sign up', 
@@ -79,6 +91,7 @@ const App = () => {
                 color: '#000'
               }
             }} />
+
           </Stack.Navigator>
         </NavigationContainer>
       )}

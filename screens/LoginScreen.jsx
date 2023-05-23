@@ -6,14 +6,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-export default function SignupScreen({navigation}) {
+export default function LoginScreen({navigation}) {
 return (
     <View style={styles.BG}>
         <LinearGradient 
         colors={['rgba(153,166,245,1)', 'rgba(29,213,143,1)']} 
         style={styles.BG_LG} >
             <SafeAreaView style={styles.container}>
-                <Text>Signup Screen</Text>
+                <Text>Login Screen</Text>
             </SafeAreaView>
         </LinearGradient>
     </View>
