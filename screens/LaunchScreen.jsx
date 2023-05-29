@@ -7,7 +7,6 @@ import { CustomButton } from '../components';
 
 
 export default function LaunchScreen({navigation}) {
-    console.log(navigation)
 // Rendu
 return (
     <View style={styles.BG}>

@@ -8,7 +8,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 // import { StatusBar } from 'expo-status-bar';
 // import { NativeBaseProvider } from 'native-base';
 import { Text, StyleSheet, View, SafeAreaView } from 'react-native';
-import { HomeScreen, LaunchScreen, LoginScreen, SignupScreen, UserScreen } from './screens';
+import { HomeScreen, LaunchScreen, LoginScreen, SignupScreen, 
+  UserScreen, RecoverPassScreen } from './screens';
 // Required : Navigation import
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -60,7 +61,7 @@ const App = () => {
           <CreatePostForm user={user} />
           <PostList />
           <UserProfile user={user} />
-          <Button title="Se déconnecter" onPress={handleLogout} />
+          <Button title="Log out" onPress={handleLogout} />
         </>
       ) : (
         <NavigationContainer>
@@ -68,7 +69,8 @@ const App = () => {
             <Stack.Screen name='LaunchScreen' component={LaunchScreen}
             options={{headerShown: false}} />
 
-            <Stack.Screen name='LoginScreen' component={LoginScreen}
+
+            <Stack.Screen name='SignupScreen' component={SignupScreen}
             options={ {
               title:'Sign up', 
               headerStyle: {
@@ -79,10 +81,23 @@ const App = () => {
                 color: '#000'
               }
             }} />
-            
-            <Stack.Screen name='SignupScreen' component={SignupScreen}
+
+            <Stack.Screen name='LoginScreen' component={LoginScreen}
             options={ {
-              title:'Sign up', 
+              title:'Login', 
+              headerStyle: {
+                backgroundColor: '#E7CBCB',
+              },
+              headerTintColor: '#fff',
+              headerBackTitleStyle: {
+                color: '#000'
+              }
+            }} />
+
+            
+            <Stack.Screen name='RecoverPassScreen' component={RecoverPassScreen}
+            options={ {
+              title:'Password recovery', 
               headerStyle: {
                 backgroundColor: '#E7CBCB',
               },

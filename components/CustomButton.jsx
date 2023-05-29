@@ -2,7 +2,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function CustomButton(props) { 
+export default function CustomButton(props) {
 return (
     <Pressable onPress={props.onPress} 
         style={()=>
@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         paddingVertical: 10,
         paddingHorizontal: 28,
+        marginTop: 12,
+        marginBottom: 12,
     },
     outline: {
         backgroundColor: 'transparent',
