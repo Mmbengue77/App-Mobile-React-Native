@@ -11,7 +11,6 @@ export default function LaunchScreen({navigation}) {
 return (
     <View style={styles.BG}>
         <LinearGradient 
-        // colors={['rgba(78,200,200,1)', 'rgba(34,34,34,1)']} 
         colors={['rgba(153,166,245,1)', 'rgba(29,213,143,1)']} 
         style={styles.BG_LG} >
             <SafeAreaView style={styles.container}>
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     },
     slogan: {
         color: '#fff',
-        fontSize: 11,
+        fontSize: 14,
         marginTop: 8,
     },
     

@@ -8,22 +8,21 @@ import { CustomButton } from '../components';
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [alert, setAlert] = useState({  obj : '', message : '' })
 
     const handleLogin = () => {
-        let validInputs = true;
-        console.log('Button login pressed');
-        email ? null : ()=>{
-            console.log("Mail address can not be empty");
-            validInputs = false;
-        };
-        pass ? null : ()=>{
-            console.log("Password can not be empty");
-            validInputs = false;
-        }
-
-        !validInputs ? null : ()=>{
-            
-        }
+        !email || email === ''
+            ? setAlert({
+                obj : "email",
+                message : "Email address can not be empty"})
+            : !pass || pass === ''
+                ? setAlert({
+                    obj : "pass",
+                    message : "Password can not be empty"})
+                : setAlert({
+                    obj : "",
+                    message : ""}) ;
+                
     };
 
     return (
@@ -35,12 +34,15 @@ export default function LoginScreen({navigation}) {
                 <View style={styles.loginForm}>
                     <TextInput
                         keyboardType='email-address'
-                        placeholder="Mail address"
+                        placeholder="Email address"
                         onChangeText={setEmail}
                         value={email}
                         style={styles.input}
                         textAlign={'center'}
                     />
+                    {alert.obj === "email"
+                    ? <Text>{alert.message}</Text> 
+                    : null}
                     <TextInput
                         placeholder="Password"
                         secureTextEntry
@@ -48,6 +50,9 @@ export default function LoginScreen({navigation}) {
                         value={pass}
                         style={styles.input}
                     />
+                    {alert.obj === "pass"
+                    ? <Text>{alert.message}</Text> 
+                    : null}
                     <CustomButton label="Login" 
                     onPress={()=>handleLogin()} />
 
