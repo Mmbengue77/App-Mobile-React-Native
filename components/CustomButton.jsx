@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         paddingVertical: 10,
         paddingHorizontal: 28,
-        marginTop: 12,
-        marginBottom: 12,
+        marginVertical: 20,
     },
     outline: {
         backgroundColor: 'transparent',

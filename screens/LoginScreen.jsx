@@ -12,60 +12,59 @@ export default function LoginScreen({navigation}) {
 
     const handleLogin = () => {
         !email || email === ''
-            ? setAlert({
-                obj : "email",
-                message : "Email address can not be empty"})
-            : !pass || pass === ''
-                ? setAlert({
-                    obj : "pass",
-                    message : "Password can not be empty"})
-                : setAlert({
-                    obj : "",
-                    message : ""}) ;
-                
+        ? setAlert({ obj : "email", message : "Email address can not be empty"})
+        : !pass || pass === ''
+            ? setAlert({ obj : "pass", message : "Password can not be empty"})
+            : ( setAlert({ obj : "loginOk", message : ("Login "+email+" successful")}),
+              loginUser(email) )
     };
+    const loginUser = (user) => {
+        console.log("Login ", user, " successful")
+    }
 
     return (
     <View style={styles.BG}>
         <LinearGradient 
         colors={['rgba(153,166,245,1)', 'rgba(29,213,143,1)']} 
         style={styles.BG_LnGr} >
-            <SafeAreaView style={styles.safeContainer}>
-                <View style={styles.loginForm}>
-                    <TextInput
-                        keyboardType='email-address'
-                        placeholder="Email address"
-                        onChangeText={setEmail}
-                        value={email}
-                        style={styles.input}
-                        textAlign={'center'}
-                    />
-                    {alert.obj === "email"
-                    ? <Text>{alert.message}</Text> 
-                    : null}
-                    <TextInput
-                        placeholder="Password"
-                        secureTextEntry
-                        onChangeText={setPass}
-                        value={pass}
-                        style={styles.input}
-                    />
-                    {alert.obj === "pass"
-                    ? <Text>{alert.message}</Text> 
-                    : null}
-                    <CustomButton label="Login" 
-                    onPress={()=>handleLogin()} />
+            <View style={styles.loginForm}>
 
-                    <Pressable 
-                    onPress={()=>navigation.navigate('RecoverPassScreen')}
-                    style={styles.btnFrame_recover}>
-                        <Text style={styles.btnLabel_recover}>
-                            Forgot password?
-                        </Text>
-                    </Pressable>
+                {alert.obj === "loginOk"
+                ? <View style={styles.alertValid_BG}><Text style={styles.alertMess}>{alert.message}</Text></View>
+                : null}
 
-                </View>
-            </SafeAreaView>
+                <TextInput
+                    keyboardType='email-address'
+                    placeholder="Email address"
+                    onChangeText={setEmail}
+                    value={email}
+                    style={styles.input}
+                    textAlign={'center'}
+                />
+                {alert.obj === "email"
+                ? <View style={styles.alertWarn_BG}><Text style={styles.alertMess}>{alert.message}</Text></View>
+                : null}
+                <TextInput
+                    placeholder="Password"
+                    secureTextEntry
+                    onChangeText={setPass}
+                    value={pass}
+                    style={styles.input}
+                />
+                {alert.obj === "pass"
+                ? <View style={styles.alertWarn_BG}><Text style={styles.alertMess}>{alert.message}</Text></View>
+                : null}
+                <CustomButton label="Login" 
+                onPress={()=>handleLogin()} />
+
+                <Pressable 
+                onPress={()=>navigation.navigate('RecoverPassScreen')}
+                style={styles.btnFrame_recover}>
+                    <Text style={styles.btnLabel_recover}>
+                        Forgot password?
+                    </Text>
+                </Pressable>
+            </View>
         </LinearGradient>
     </View>
 )}
@@ -80,30 +79,38 @@ const styles = StyleSheet.create({
     BG_LnGr: {
         flex: 1,
     },
-    safeContainer: {
-        flex: 1,
-        justifyContent: 'center',
-    },
     loginForm: {
         flex: 1,
-        borderColor: '#000000',
         justifyContent: 'center',
         alignItems: 'center',
     },
     input: {
         width: '70%',
-        paddingTop: 12,
-        paddingRight: 18,
-        paddingBottom: 12,
-        paddingLeft: 18,
+        paddingVertical: 8,
+        paddingHorizontal: 18,
         marginTop: 12,
         textAlign: 'center',
-        fontSize: 22,
+        fontSize: 21,
         borderWidth: 1,
         borderColor: '#456',
-        borderRadius: 20,
+        borderRadius: 12,
         color: '#000',
     },
+
+    alertWarn_BG: {
+        paddingHorizontal: 14,
+        paddingVertical: 2,
+        backgroundColor: '#a30000',
+    },
+    alertValid_BG: {
+        paddingHorizontal: 14,
+        paddingVertical: 2,
+        backgroundColor: '#7e8542',
+    },
+    alertMess: {
+        color: "#fff"
+    },
+
     btnFrame_recover: {
         marginVertical: 16,
         paddingVertical: 8,
