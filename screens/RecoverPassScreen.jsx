@@ -1,20 +1,20 @@
 // IMPORTS & DEPS
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Pressable, } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { CustomButton } from '../components';
 
 
 export default function RecoverPassScreen({navigation}) {
     const [email, setEmail] = useState('');
+    const [alert, setAlert] = useState({  obj : '', message : '' })
+    const [btnName, setBtnName] = useState("Send recovery mail")
 
 const handleRecoverySubmit = () => {
     !email || email === ''
-    ? ( console.log("Arrow function executed"),
+    ? ( 
         setAlert({ obj : "email",  message : "Email address can not be empty"}) )
-    : (setAlert({ obj : "", message : ""}),
-    console.log('Recovery mail sent.')) ;
-    
+    : (setAlert({ obj : "sended", message : "Recovery mail sent to "+email}),
+        setBtnName('Send email again'),
+        console.log('Recovery mail sent.')) ;
     
 }
 
@@ -28,6 +28,9 @@ return (
             </Text>
         </View>
         <View style={styles.recoveryFrom}>
+            {alert.obj === "sended"
+            ? <View style={styles.alertValid_BG}><Text style={styles.alertMess}>{alert.message}</Text></View>
+            : null}
             <TextInput
                 keyboardType='email-address'
                 placeholder="Your mail address"
@@ -37,11 +40,15 @@ return (
                 textAlign={'center'}
             />
 
+            {alert.obj === "email"
+            ? <View style={styles.alertWarn_BG}><Text style={styles.alertMess}>{alert.message}</Text></View>
+            : null}
+
             <Pressable 
             onPress={()=>handleRecoverySubmit()}
             style={styles.btnFrame}>
                 <Text style={styles.btnLabel}>
-                    Send recovery mail
+                    {btnName}
                 </Text>
             </Pressable>
         </View>
@@ -93,6 +100,21 @@ const styles = StyleSheet.create({
     btnLabel: {
         flex: 0,
         fontSize: 14,
+    },
+
+
+    alertWarn_BG: {
+        paddingHorizontal: 14,
+        paddingVertical: 2,
+        backgroundColor: '#a30000',
+    },
+    alertValid_BG: {
+        paddingHorizontal: 14,
+        paddingVertical: 2,
+        backgroundColor: '#7e8542',
+    },
+    alertMess: {
+        color: "#fff"
     },
 })
 
