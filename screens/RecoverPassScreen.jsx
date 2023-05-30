@@ -9,7 +9,13 @@ export default function RecoverPassScreen({navigation}) {
     const [email, setEmail] = useState('');
 
 const handleRecoverySubmit = () => {
-    console.log('Recovery mail sent.');
+    !email || email === ''
+    ? ( console.log("Arrow function executed"),
+        setAlert({ obj : "email",  message : "Email address can not be empty"}) )
+    : (setAlert({ obj : "", message : ""}),
+    console.log('Recovery mail sent.')) ;
+    
+    
 }
 
 return (
